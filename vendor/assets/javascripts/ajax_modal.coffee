@@ -2,7 +2,7 @@
   $.ajaxModal = (url, params) ->
     $.get url, params, (data) ->
       $modal = if $('#modalWindow').size() > 0 then $('#modalWindow') else $('<div>').addClass('modal fade').attr('id', 'modalWindow')
-      $modal.html(data).modal()
+      $('body').append($modal.html(data).modal())
       $(document).trigger('ajax-modal-show')
       
       $modal.on 'hidden', (e) ->
