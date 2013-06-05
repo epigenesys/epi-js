@@ -5,6 +5,9 @@
       $modal.html(data).modal().on 'hidden', (e) ->
         if e.target is this
           $(@).remove()
+      .on 'show', (e) ->
+        if e.target is this
+          $(document).trigger('ajax-modal-show')
       .on 'shown', (e) ->
         if e.target is this
           $(document).trigger('ajax-modal-shown')
