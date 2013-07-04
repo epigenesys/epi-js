@@ -10,7 +10,7 @@
           $(@).remove()
       .on 'shown', (e) ->
         if e.target is this
-          $('input[autofocus]', $(this)).first().focus()
+          setTimeout("$('#modalWindow [autofocus]').first().focus()", 0)
           $(document).trigger('ajax-modal-shown')
 ) jQuery
 
