@@ -5,9 +5,9 @@
         $(@).data 'fieldList', $.unique $.map $(@).data('visibility-map'), (val) -> $(val).get()            
         
       $toShow = $($(@).data('visibility-map')[$(@).val()])
-      $toShow.show().find('input, select, textarea').prop 'disabled', false
+      $toShow.show().trigger('visibility.show').find('input, select, textarea').prop 'disabled', false
       
-      $($(@).data('fieldList')).not($toShow).hide().find('input, select, textarea').prop 'disabled', true
+      $($(@).data('fieldList')).not($toShow).hide().trigger('visibility.hide').find('input, select, textarea').prop 'disabled', true
       
 ) jQuery
 
