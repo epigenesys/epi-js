@@ -1,6 +1,3 @@
-@import 'bootstrap/variables'
-@import 'bootstrap/mixins'
-
 .flash-messages
   position: fixed
   margin-top: 60px
@@ -10,9 +7,3 @@
     word-wrap: break-word
     width: 200px
     min-height: 30px
-    @include box-shadow(0 5px 10px rgba(0,0,0,.2))
-    @include buttonBackground(lighten($btnWarningBackground, 5%), lighten($btnWarningBackgroundHighlight, 5%))
-    &.alert-success
-      @include buttonBackground(lighten($btnSuccessBackground, 5%), lighten($btnSuccessBackgroundHighlight, 5%))
-    &.alert-error
-      @include buttonBackground(lighten($btnDangerBackground, 5%), lighten($btnDangerBackgroundHighlight, 5%))
