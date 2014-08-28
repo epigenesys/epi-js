@@ -5,13 +5,12 @@
       $('body').append($modal.html(data).modal())
       $(document).trigger('ajax-modal-show')
       
-      $modal.on 'hidden', (e) ->
+      $modal.on 'hidden.bs.modal', (e) ->
         if e.target is this
           $(@).remove()
-      .on 'shown', (e) ->
-        if e.target is this
-          setTimeout("$('#modalWindow [autofocus]').first().focus()", 0)
-          $(document).trigger('ajax-modal-shown')
+      .on 'shown.bs.modal', (e) ->
+        setTimeout("$('#modalWindow [autofocus]').first().focus()", 0)
+        $(document).trigger('ajax-modal-shown')
 ) jQuery
 
 $ ->
