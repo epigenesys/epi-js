@@ -1,6 +1,7 @@
 (($) ->
   $.flashAlert = (message, type, timeout = 6000) ->
-    $alert = $('<div>').addClass("alert fade in #{type}").append($('<a>').attr('data-dismiss', 'alert').addClass('close').html('&times;')).append(message)
+    $dismissLink = $('<a href="#" title="Hid this message" data-dismiss="alert"></a>').html('Dismiss')
+    $alert = $('<div>').addClass("alert fade in #{type}").append(message).append($dismissLink)
     if $('.flash-messages .alert').size() > 2
       clearTimeout $('.flash-messages .alert:last').remove().data('timeout')
     $('.flash-messages').prepend($alert)
