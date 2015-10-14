@@ -2,8 +2,14 @@
   $.ajaxModal = (url, params) ->
     $.get url, params, (data) ->
       $modal = if $('#modalWindow').size() > 0 then $('#modalWindow') else $('<div>').addClass('modal fade').attr('id', 'modalWindow')
+      
+      alreadyShown = $modal.hasClass('in')
+
       $('body').append($modal.html(data).modal())
       $(document).trigger('ajax-modal-show')
+      
+      if alreadyShown
+        $(document).trigger('ajax-modal-shown')
       
       # Bootstrap 2.x the events are shown and hidden
       # Bootstrap 3.x the event is hidden.bs.modal and shown.bs.modal
