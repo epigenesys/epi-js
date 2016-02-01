@@ -38,5 +38,5 @@
     $('input[data-visibility-map]:checked, select[data-visibility-map]').setVisibility()
     
     $(document.body).on 'change', '[data-visibility-map]', (e) ->
-      $(e.target).setVisibility()
+      $(this).setVisibility()
 ) jQuery
