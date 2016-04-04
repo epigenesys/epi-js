@@ -1,0 +1,37 @@
+@import 'bootstrap/variables'
+
+@mixin responsive-margins-and-paddings($gap-size, $screen-size-suffix: '')
+  $positions: top right bottom left
+  @each $position in $positions
+    .margin-#{$position}-#{$gap-size}#{$screen-size-suffix}
+      margin-#{$position}: #{$gap-size}px !important
+    
+    .padding-#{$position}-#{$gap-size}#{$screen-size-suffix}
+      padding-#{$position}: #{$gap-size}px !important
+    
+@for $i from 0 through 12
+  @include responsive-margins-and-paddings(($i * 5))
+  @media (max-width: $screen-xs-max)
+    @include responsive-margins-and-paddings(($i * 5), '-xs')
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max)
+    @include responsive-margins-and-paddings(($i * 5), '-sm')
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max)
+    @include responsive-margins-and-paddings(($i * 5), '-md')
+  @media (min-width: $screen-lg-min)
+    @include responsive-margins-and-paddings(($i * 5), '-lg')
+    
+.mini
+  width: 1px
+  
+.nowrap
+  white-space: nowrap
+  
+.display-none        
+  display: none
+
+@media print
+  .no-print
+    &:before
+      content: 'This page cannot be printed. Please view the document online.'
+    *
+      display: none !important

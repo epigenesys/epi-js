@@ -1,4 +1,5 @@
 (($) ->
+  'use strict'
   $.ajaxModal = (url, params) ->
     $.get url, params, (data) ->
       $modal = if $('#modalWindow').size() > 0 then $('#modalWindow') else $('<div>').addClass('modal fade').attr('id', 'modalWindow')
@@ -19,9 +20,9 @@
       .on 'shown.bs.modal shown', (e) ->
         setTimeout("$('#modalWindow [autofocus]').first().focus()", 0)
         $(document).trigger('ajax-modal-shown')
+        
+  $ ->
+    $(document.body).on 'click', 'a.ajax-modal, a[data-toggle="ajax-modal"]', (e) ->
+      e.preventDefault()
+      $.ajaxModal $(@).attr('href'), $(@).data('params')
 ) jQuery
-
-$ ->
-  $(document.body).on 'click', 'a.ajax-modal', (e) ->
-    e.preventDefault()
-    $.ajaxModal $(@).attr('href'), $(@).data('params')

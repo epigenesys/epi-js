@@ -1,0 +1,41 @@
+@import 'bootstrap/variables'
+
+@mixin responsive-table()
+  &, thead, tbody, th, td, tr
+    display: block
+  td
+    border: none
+  thead
+    position: absolute
+    top: -9999px
+    left: -9999px
+    border: none
+    tr
+      border: none
+      td, th
+        border: none
+  tbody
+    tr
+      border: 1px solid $table-border-color
+      & + tr
+        margin-top: 5px
+      td, th
+        border-top: none
+        text-align: left
+        width: 100% !important
+        & + td
+          border-top: 1px dotted lighten($table-border-color, 8%)
+        &:before
+          display: block
+          white-space: nowrap
+          font-weight: bold
+          text-transform: uppercase
+          content: attr(data-label)
+
+@media (max-width: $screen-xs-max)
+  table.table-responsive-xs
+    @include responsive-table()
+
+@media (max-width: $screen-sm-max)
+  table.table-responsive-sm
+    @include responsive-table()
