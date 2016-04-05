@@ -4,6 +4,7 @@ Some jQuery based scripts, including:
 
 * A simple AJAX lightbox using Twitter Bootstrap modal
 * A simple Growl-like using Twitter Bootstrap alert
+* A simple table filter
 * A script to hide / show HTML elements based on user input
 
 ## Installation
@@ -106,3 +107,16 @@ Or for SimpleForm, use:
     f.input :some_select, input_html: {data: {visibility_map: {foo: '#foo', bar: '#bar'}}}
 
 When the value of the input element is `foo`, the element `#foo` will be visible and `#bar` will be hidden, and vice versa. The value of the JSON key value pair can be any jQuery selectors.
+
+### Table filter
+This allows you to filter out rows in a table based on an input field.
+
+Add to your `app/assets/javascripts/application.js`
+
+    //= require table_filter
+
+#### Via data attributes
+Set `data-table-filter-target` on the input field you wish to filter by. This should be a selecter for the `table` tag you want to filter. This needs to have a `thead` and `tbody`.
+
+
+You can overwrite the default 'No record found' message by setting `data-no-record` on the table. The span of this will default to the number of `tr` elements in `thead`, but is customisable with `data-no-record-span` on the table.
