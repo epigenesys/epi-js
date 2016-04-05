@@ -6,11 +6,11 @@ require 'epi_js/version'
 Gem::Specification.new do |gem|
   gem.name          = "epi_js"
   gem.version       = EpiJs::VERSION
-  gem.authors       = ["Shuo Chen"]
+  gem.authors       = ["Shuo Chen", "Ryan Bibby"]
   gem.email         = ["s.chen@epigenesys.co.uk"]
   gem.description   = %q{jQuery scripts used in various projects}
   gem.summary       = %q{jQuery scripts used in various projects}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/epigenesys/epi-js"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
