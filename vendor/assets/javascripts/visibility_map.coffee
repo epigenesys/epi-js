@@ -3,20 +3,28 @@
   class GenericVisibilityChecker
     constructor: (element) ->
       @element = element
-      @map = @element.data('visibility-map')
-      @allFields = $($.unique $.map @map, (val) -> $(val).get())
+      @scope   = @element.closest(@element.data('visibility-map-scope') ? document)
+      @action  = @element.data('visibility-map-action') ? 'show'
+      @map     = @element.data('visibility-map')
+      @allFields = $($.unique $.map @map, (val) => $(val, @scope).get())
   
     check: ->
-        toShow = $ $.unique $.map @getValue(), (value) => $(@map[value]).get()
-        toHide = @allFields.not(toShow)
+      fieldsForValue = $ $.unique $.map @getValue(), (value) => $(@map[value], @scope).get()
       
-        toShow.show()
-        toShow.trigger('visibility.show')
-        $(':input:not([data-visibility-map-no-auto-enable])', toShow).prop('disabled', false)
-        
-        toHide.hide()
-        toHide.trigger('visibility.hide')
-        $(':input', toHide).prop('disabled', true)
+      if @action is 'show'
+        toShow = fieldsForValue
+        toHide = @allFields.not(fieldsForValue)
+      else
+        toHide = fieldsForValue
+        toShow = @allFields.not(fieldsForValue)
+    
+      toShow.show()
+      toShow.trigger('visibility.show')
+      $(':input:not([data-visibility-map-no-auto-enable])', toShow).prop('disabled', false)
+      
+      toHide.hide()
+      toHide.trigger('visibility.hide')
+      $(':input', toHide).prop('disabled', true)
     
     getValue: ->
       $.makeArray(@element.val())

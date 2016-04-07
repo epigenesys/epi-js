@@ -108,6 +108,23 @@ Or for SimpleForm, use:
 
 When the value of the input element is `foo`, the element `#foo` will be visible and `#bar` will be hidden, and vice versa. The value of the JSON key value pair can be any jQuery selectors.
 
+#### Other options
+1. You can limit the scope of elements to hide / show by providing a JQuery selector as the `data-visibility-map-scope` attribute. Then only elements within the closest element of input matching the given selector will be affected, e.g.
+
+        .nested-fields
+          = f.input :some_select, input_html: {data: {visibility_map_scope: '.nested-fields', visibility_map: {foo: '.foo', bar: '.bar'}}}
+          .foo
+          .bar
+          
+        .nested-fields
+          = f.input :some_select, input_html: {data: {visibility_map_scope: '.nested-fields', visibility_map: {foo: '.foo', bar: '.bar'}}}
+          .foo
+          .bar
+
+    When the value of the first select is set to `foo`, only the `.foo` in the first `.nested-fields` will be displayed
+
+2. By setting the `data-visibility-map-action` attribute to `hide`, elements will be shown by default and only hidden when the given value is selected.
+
 ### Table filter
 This allows you to filter out rows in a table based on an input field.
 
