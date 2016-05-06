@@ -2,11 +2,19 @@
   'use strict'
   $.ajaxModal = (url, params) ->
     $.get url, params, (data) ->
-      $modal = if $('#modalWindow').size() > 0 then $('#modalWindow') else $('<div>').addClass('modal fade').attr('id', 'modalWindow')
+      $modal = if $('#modalWindow').size() > 0 
+        $('#modalWindow')
+      else
+        $('<div id="modalWindow" class="modal fade" tabindex="-1" role="dialog"></div>')
       
       alreadyShown = $modal.hasClass('in')
+      $modal.html(data)
+      $('.modal-title', $modal).attr('id', 'modalWindowTitle')
+      
+      $modal.attr('aria-labelledby', 'modalWindowTitle')
+      $('.modal-dialog', $modal).attr('role', 'document')
 
-      $('body').append($modal.html(data).modal())
+      $('body').append($modal.modal())
       $(document).trigger('ajax-modal-show')
       
       if alreadyShown

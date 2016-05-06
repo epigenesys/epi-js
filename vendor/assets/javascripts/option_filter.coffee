@@ -4,24 +4,21 @@
     constructor: (element) ->
       @element      = element
       @filterTarget = $(@element.data('option-filter-target'))
-      @allOptions   = $('[data-option-filter-value]', @filterTarget)
-      
       @disableEmpty = @element.data('option-filter-disable-empty')?
+      
+      @filterTarget.each ->      
+        unless $(this).data('option-filter-all-options')?
+          $(this).data('option-filter-all-options', $('option', $(this)))
       
     filter: ->
       valueSelected = @element.val().toString()
+      disableEmpty  = @disableEmpty
       
-      filteredOptionsCount = 0
-
-      if valueSelected is ''
-        @allOptions.hide()
-      else
-        $toShow = @allOptions.filter("[data-option-filter-value='#{valueSelected}']").show()
-        @allOptions.not($toShow).hide()
-        filteredOptionsCount = $toShow.size()
+      @filterTarget.each ->
+        $toShow = $(this).data('option-filter-all-options').filter("[data-option-filter-value='#{valueSelected}'], :not([data-option-filter-value])")
         
-      @filterTarget.val('').trigger('change.option-filter')
-      @filterTarget.prop('disabled', @disableEmpty and (filteredOptionsCount is 0))
+        $(this).html($toShow).val('').trigger('change.option-filter')      
+        $(this).prop('disabled', disableEmpty and ($toShow.size() is 0))
     
   $.fn.optionFilter = ->
     @each ->
@@ -31,7 +28,7 @@
       data.filter()
       
   $ ->
-    $('[data-option-filter-target]').optionFilter()
+    $('input[data-visibility-map]:checked, select[data-visibility-map]').optionFilter()
     
     $(document.body).on 'change', '[data-option-filter-target]', (e) ->
       $(this).optionFilter()
