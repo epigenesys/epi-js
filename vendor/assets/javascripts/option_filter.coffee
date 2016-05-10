@@ -15,9 +15,14 @@
       disableEmpty  = @disableEmpty
       
       @filterTarget.each ->
+        $selected = $(':selected', $(this))
+        
         $toShow = $(this).data('option-filter-all-options').filter("[data-option-filter-value='#{valueSelected}'], :not([data-option-filter-value])")
         
-        $(this).html($toShow).val('').trigger('change.option-filter')      
+        unless $toShow.filter($selected).size() > 0
+          $(this).val('')
+        
+        $(this).html($toShow).trigger('change.option-filter')      
         $(this).prop('disabled', disableEmpty and ($toShow.size() is 0))
     
   $.fn.optionFilter = ->
