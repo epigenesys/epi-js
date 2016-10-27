@@ -6,6 +6,6 @@
       $("tr td:nth-child(#{index + 1})", $(this).closest('thead').next('tbody')).attr('data-label', label)
   )
   
-  $('table.table-responsive-xs, table..table-responsive-sm').each ->
+  $('table.table-responsive-xs, table.table-responsive-sm').each ->
     $(this).trigger('set-label')
 ) jQuery
