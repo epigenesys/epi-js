@@ -146,4 +146,6 @@ You can overwrite the default 'No record found' message by setting `data-no-reco
 
 Also can be for specific screen sizes: .margin-top-10-sm
 
-Others include .mini, .nowrap, .display-none
+#### Others
+
+.mini, .nowrap, .display-none
