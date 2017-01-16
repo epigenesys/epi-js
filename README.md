@@ -87,7 +87,7 @@ Add to your `app/assets/javascripts/application.js`
     //= require responsive_table
 
 And to your `app/assets/stylesheets/application.css`
-  
+
     *= require responsive_table
 
 Then add `.table-responsive-xs` or `.table-responsive-sm` to tables.
@@ -115,7 +115,7 @@ When the value of the input element is `foo`, the element `#foo` will be visible
           = f.input :some_select, input_html: {data: {visibility_map_scope: '.nested-fields', visibility_map: {foo: '.foo', bar: '.bar'}}}
           .foo
           .bar
-          
+
         .nested-fields
           = f.input :some_select, input_html: {data: {visibility_map_scope: '.nested-fields', visibility_map: {foo: '.foo', bar: '.bar'}}}
           .foo
@@ -137,3 +137,13 @@ Set `data-table-filter-target` on the input field you wish to filter by. This sh
 
 
 You can overwrite the default 'No record found' message by setting `data-no-record` on the table. The span of this will default to the number of `tr` elements in `thead`, but is customisable with `data-no-record-span` on the table.
+
+### CSS Utilities
+
+#### Margins and Padding
+
+.margin-top-10 puts a 10px margin at the top etc.
+
+Also can be for specific screen sizes: .margin-top-10-sm
+
+Others include .mini, .nowrap, .display-none
