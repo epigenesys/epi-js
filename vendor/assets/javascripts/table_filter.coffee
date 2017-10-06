@@ -8,7 +8,7 @@
       colspan = if @target.data('no-record-span')?
         @target.data('no-record-span')
       else
-        $('thead th', @target).size()
+        $('thead th', @target).length
 
       message = if @target.data('no-record')?
         @target.data('no-record')
@@ -30,7 +30,7 @@
       $toShow.show()
       @allRows.not($toShow).hide()
 
-      if $toShow.size() is 0
+      if $toShow.length is 0
         $('tbody', @target).append(@noRecordRow)
 
   $.fn.tableFilter = ->
