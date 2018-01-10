@@ -20,13 +20,16 @@
     
       toShow.show()
       toShow.trigger('visibility.show')
+      $(':input:not([data-visibility-map-no-auto-enable])', toShow).prop('disabled', false)
       
       toHide.hide()
       toHide.trigger('visibility.hide')
-      
+      $(':input', toHide).prop('disabled', true)
+    
     hideAll: ->
       @allFields.hide()
       @allFields.trigger('visibility.hide')
+      $(':input', @allFields).prop('disabled', true)
     
     getValue: ->
       $.makeArray(@element.val())
@@ -47,12 +50,6 @@
     
   $ ->
     $('input[data-visibility-map]:checked, select[data-visibility-map]').setVisibility()
-    
-    $(document.body).on 'visibility.show', ->
-      $(':input:not([data-visibility-map-no-auto-enable])', $(this)).prop('disabled', false)
-    
-    $(document.body).on 'visibility.hide', ->
-      $(':input', $(this)).prop('disabled', true)
     
     $(document.body).on 'change', '[data-visibility-map]', (e) ->
       $(this).setVisibility()
