@@ -20,11 +20,13 @@
     
       toShow.show()
       toShow.trigger('visibility.show')
-      $(':input:not([data-visibility-map-no-auto-enable])', toShow).prop('disabled', false)
       
       toHide.hide()
       toHide.trigger('visibility.hide')
-      $(':input', toHide).prop('disabled', true)
+      
+    hideAll: ->
+      @allFields.hide()
+      @allFields.trigger('visibility.hide')
     
     getValue: ->
       $.makeArray(@element.val())
@@ -34,16 +36,23 @@
       $.map $("input[type='checkbox'][name='#{@element.attr('name')}']:checked"), (inputElement) ->
         $(inputElement).val()
   
-  $.fn.setVisibility = ->
+  $.fn.setVisibility = (action) ->
     @each ->
       data = $(this).data('visibility-checker')
       unless data?
         checkerClass = if $(this).is("input[type='checkbox']") then CheckboxVisibilityChecker else GenericVisibilityChecker    
         $(this).data('visibility-checker', data = new checkerClass $(this))
-      data.check()
+      action ?= 'check'
+      data[action]()
     
   $ ->
     $('input[data-visibility-map]:checked, select[data-visibility-map]').setVisibility()
+    
+    $(document.body).on 'visibility.show', ->
+      $(':input:not([data-visibility-map-no-auto-enable])', $(this)).prop('disabled', false)
+    
+    $(document.body).on 'visibility.hide', ->
+      $(':input', $(this)).prop('disabled', true)
     
     $(document.body).on 'change', '[data-visibility-map]', (e) ->
       $(this).setVisibility()

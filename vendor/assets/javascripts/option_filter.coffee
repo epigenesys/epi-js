@@ -33,7 +33,7 @@
       data.filter()
 
   $ ->
-    $('input[data-visibility-map]:checked, select[data-visibility-map]').optionFilter()
+    $('[data-option-filter-target]').optionFilter()
 
     $(document.body).on 'change', '[data-option-filter-target]', (e) ->
       $(this).optionFilter()
