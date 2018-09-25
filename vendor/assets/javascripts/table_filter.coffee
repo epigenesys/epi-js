@@ -4,7 +4,7 @@
     constructor: (element) ->
       @element = element
       @target  = $(@element.data('table-filter-target'))
-      @allRows = $('tbody tr:not(.tr-no-record)', @target)
+
       colspan = if @target.data('no-record-span')?
         @target.data('no-record-span')
       else
@@ -18,21 +18,24 @@
       @noRecordRow = $("<tr class='tr-no-record'><td colspan=#{colspan}>#{message}</td></tr>")
     filter: ->
       $('.tr-no-record', @target).remove()
+      allRows = @allRows()
       keyword = @element.val().toLowerCase()
 
       $toShow = if keyword is ''
-        @allRows
+        allRows
       else
-        @allRows.filter ->
+        allRows.filter ->
           trText = $(this).clone().find('.btn').remove().end().text().toLowerCase()
           trText.indexOf(keyword) > -1
 
       $toShow.show()
-      @allRows.not($toShow).hide()
+      allRows.not($toShow).hide()
 
       if $toShow.length is 0
         $('tbody', @target).append(@noRecordRow)
 
+    allRows: ->
+      $('tbody tr:not(.tr-no-record)', @target)
   $.fn.tableFilter = ->
     @each ->
       data = $(this).data('table-filter')
