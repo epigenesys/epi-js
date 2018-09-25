@@ -24,5 +24,9 @@
 
     if $('.flash-messages .alert').length > 0
       $('.flash-messages .alert').addClass('in')
-      setTimeout("$('.flash-messages .alert').alert('close');", 6000)
+      setTimeout(
+        ->
+          $('.flash-messages .alert').alert('close')
+        , 6000
+      )
 ) jQuery
