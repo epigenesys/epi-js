@@ -2,7 +2,7 @@
   'use strict'
   $.ajaxModal = (url, params) ->
     $.get url, params, (data) ->
-      $modal = if $('#modalWindow').length > 0 
+      $modal = if $('#modalWindow').length > 0
         $('#modalWindow')
       else
         $('<div id="modalWindow" class="modal fade" tabindex="-1" role="dialog"></div>')
@@ -30,7 +30,8 @@
         $(document).trigger('ajax-modal-shown')
 
   $ ->
-    $(document.body).on 'click', 'a.ajax-modal, a[data-toggle="ajax-modal"]', (e) ->
+    $(document.body).on 'click', 'a.ajax-modal, [data-toggle="ajax-modal"]', (e) ->
       e.preventDefault()
-      $.ajaxModal $(@).attr('href'), $(@).data('params')
+      url = $(@).data('url') ? $(@).attr('href')
+      $.ajaxModal url, $(@).data('params')
 ) jQuery
