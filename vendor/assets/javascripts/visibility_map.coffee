@@ -50,13 +50,13 @@
       data[action]()
 
   $ ->
-    $('input[data-visibility-map]:checked, select[data-visibility-map]').setVisibility()
-
     $(document.body).on('visibility.show', (e) ->
       $(':input:not([data-visibility-map-no-auto-enable])', $(e.target)).prop('disabled', false)
     ).on('visibility.hide', (e) ->
       $(':input', $(e.target)).prop('disabled', true)
     )
+
+    $('input[data-visibility-map]:checked, select[data-visibility-map]').setVisibility()
 
     $(document.body).on 'change', '[data-visibility-map]', (e) ->
       $(this).setVisibility()
