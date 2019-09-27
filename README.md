@@ -1,4 +1,4 @@
-# EpiJS
+# epiJS
 
 Some jQuery based scripts, including:
 
