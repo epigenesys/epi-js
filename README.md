@@ -24,6 +24,9 @@ Or install it yourself as:
 ## Usage
 
 ### AJAX Modal
+
+A usage guide is available [here](/docs/ajax_modal.md)
+
 Add to your `app/assets/javascripts/application.js`
 
     //= require ajax_modal
